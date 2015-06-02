@@ -30,54 +30,54 @@ class CollatzUnitTests extends DrupalUnitTestCase {
 
 }
 
-// class CollatzFunctionalTests extends DrupalWebTestCase {
-//
-//     public static function getInfo() {
-//         return array(
-//             'name' => 'Collatz functional tests',
-//             'description' => 'Tests for the Title Case module.',
-//             'group' => 'Cool Stuff',
-//         );
-//     }
-//
-//     public function setUp() {
-//         parent::setUp(array('title_case'));
-//
-//         $user = $this->drupalCreateAdminUser();
-//         $this->drupalLogin($user);
-//
-//         $info = array();
-//         $info['input'] = "the rain in spain";
-//         //found the URL to post the form to by manually clicking to the Add Content menu and clicking on Page.
-//         $this->drupalPost('title_case', $info, t('Title-Case me!'));
-//
-//         $path['source'] = 'title_case';
-//         $path['alias'] = 'title_case_form';
-//         path_save($path);
-//     }
-//
-//     public function drupalCreateAdminUser(array $permissions = array()) {
-//         $roles = user_roles();
-//         $index = array_search('administrator', $roles);
-//         $user = $this->drupalCreateUser($permissions);
-//         $user->roles[$index] = 'administrator';
-//         return user_save($user);
-//     }
-//
-//     public function testCollatzForm() {
-//         $this->drupalGet('title_case');
-//         $this->assertText("Input", 'The text on the page is correct. Hoorah!');
-//
-//         $this->drupalGet('title_case_success');
-//         $this->assertText("The Rain in Spain", 'The text on the page is correct. Hoorah!');
-//     }
-//
-//     public function drupalCreateAuthenticatedUser($permissions = array()) {
-//         $roles = user_roles();
-//         $index = array_search('authenticated', $roles);
-//         $user = $this->drupalCreateUser($permissions);
-//         $user->roles[$index] = 'authenticated';
-//         return user_save($user);
-//     }
-//
-// }
+class CollatzFunctionalTests extends DrupalWebTestCase {
+
+    public static function getInfo() {
+        return array(
+            'name' => 'Collatz functional tests',
+            'description' => 'Tests for the Collatz module.',
+            'group' => 'Cool Stuff',
+        );
+    }
+
+    public function setUp() {
+        parent::setUp(array('collatz'));
+
+        $user = $this->drupalCreateAdminUser();
+        $this->drupalLogin($user);
+
+        $info = array();
+        $info['input'] = "1";
+        //found the URL to post the form to by manually clicking to the Add Content menu and clicking on Page.
+        $this->drupalPost('collatz', $info, t('submit'));
+
+        $path['source'] = 'collatz';
+        $path['alias'] = 'collatz_form';
+        path_save($path);
+    }
+
+    public function drupalCreateAdminUser(array $permissions = array()) {
+        $roles = user_roles();
+        $index = array_search('administrator', $roles);
+        $user = $this->drupalCreateUser($permissions);
+        $user->roles[$index] = 'administrator';
+        return user_save($user);
+    }
+
+    public function testCollatzForm() {
+        $this->drupalGet('collatz');
+        $this->assertText("Input", 'The text on the page is correct. Hoorah!');
+
+        $this->drupalGet('collatz_success');
+        $this->assertText("1", 'The text on the page is correct. Hoorah!');
+    }
+
+    public function drupalCreateAuthenticatedUser($permissions = array()) {
+        $roles = user_roles();
+        $index = array_search('authenticated', $roles);
+        $user = $this->drupalCreateUser($permissions);
+        $user->roles[$index] = 'authenticated';
+        return user_save($user);
+    }
+
+}
