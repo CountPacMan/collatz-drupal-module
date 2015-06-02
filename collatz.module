@@ -14,7 +14,6 @@ function get_collatz($input, $final = []) {
             $input += 1;
         }
         return get_collatz($input, $final);
-        // return $input;
     }
 }
 
@@ -40,6 +39,7 @@ function collatz_form() {
     $form['input'] = array(
         '#title' => 'Input Number to Collatz',
         '#type' => 'textfield',
+        '#element_validate' => array('element_validate_integer_positive'),
     );
     $form['submit'] = array(
         '#type' => 'submit',
